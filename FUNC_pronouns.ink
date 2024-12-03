@@ -33,11 +33,11 @@ Test:
     ~ npcA += nonbinary
 + Object / it
     ~ npcA += it_gender
-+ People
++ People (Lists)
     -> People
-+ Things
++ Things (Lists)
     -> Things
-+ Inventory Items
++ Inventory Items (Lists)
     -> Items
 + Currencies (Integers)
     -> Currencies
@@ -492,6 +492,7 @@ You have {print_num(currency)} coin{plurInt(currency)}.
 // <<<<<<<<<<<<<<<<<< NARRATE NUMBERS >>>>>>>>>>>>>>>>>>>
 
 === function print_num(x) ===
+// From Inky Documentation
 {
     - x >= 1000:
         {print_num(x / 1000)} thousand { x mod 1000 > 0:{print_num(x mod 1000)}}
