@@ -10,6 +10,7 @@ VAR BedroomExaminables = (Bed, Dog, Cat, Parrot)
 -> ExamineLogic
     
 == ExamineLogic
+{not BedroomExaminables:You've looked at everything.->DONE}
 Examine?
 <- PopulateOptions(-> Examine, BedroomExaminables)
 ->DONE
@@ -25,4 +26,5 @@ Examine?
 
 == Examine(x)
 You look at {x}.
--> DONE
+~ BedroomExaminables -= x
+-> ExamineLogic
