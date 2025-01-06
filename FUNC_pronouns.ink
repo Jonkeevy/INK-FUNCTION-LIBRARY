@@ -6,19 +6,14 @@ LIST otherList = other
 LIST people = Bob, Dave, Sean, Ida
 LIST things = (hammer), block, nail, rat, pencil
 
-LIST materials = iron, silver, steel, gold, wood
-LIST weapons = sword, spear, axe, club, dagger
-LIST quantities = J, A, B, C, D, E, F, G, H, I, AJ, AA
+
 
 //VAR quantCoins = 0
 
 VAR coins = 0
 VAR testThing = (iron, dagger, I)
 
-INCLUDE FUNC_essentials.ink
-
-
-->grammar_test_menu
+//->grammar_test_menu
 
 == grammar_test_menu
 ~ npcA = ()
@@ -111,11 +106,12 @@ If you have {narr_thingpossibles(x,"your imagination")} then use {thatthose(x,"t
 
 == Items
 + Daggers
+    ~ testThing = item_dagger
     -> Single_Plural_Items(testThing)
 
 == Single_Plural_Items(item)
 
-You have {narr_quant(item)} {filter(item, materials)} {filter(item, weapons)}{plurInt(quantity(item))}.
+You have {narr_quant(item)} {filter(item, material)} {filter(item, item_name)}{plurInt(quantity(item))}.
 -->grammar_test_menu
 
 == Currencies
@@ -134,13 +130,6 @@ You have {narr_quant(item)} {filter(item, materials)} {filter(item, weapons)}{pl
 You have {print_num(currency)} coin{plurInt(currency)}.
 
 -->grammar_test_menu
-
-== function quantity(item)
-~ return LIST_VALUE(filter(item, quantities))
-
-== function narr_quant(item)
-{print_num(LIST_VALUE(filter(item, quantities)))}
-
 
 
 // <<<<<<<<<<<<<<<<<<<<< PRONOUN >>>>>>>>>>>>>>>>>>>>>>

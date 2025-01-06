@@ -1,3 +1,4 @@
+// BAND MANAGER GAME
 // ................. AUDITIONS
 
 === function name(x)

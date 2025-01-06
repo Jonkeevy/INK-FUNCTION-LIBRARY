@@ -1,6 +1,6 @@
+// SNIPPET
 
-
--> GamePlay
+//-> GamePlay
 
 === GamePlay
 
@@ -8,7 +8,7 @@
     You caught {->allFish.Fish1->|->Fish2->|->Fish3->|nothing. The pond is empty. ->DONE}
     
 + View encyclopedia
- ->Encyclopedia->
+ <-Encyclopedia
 
 -->GamePlay
 

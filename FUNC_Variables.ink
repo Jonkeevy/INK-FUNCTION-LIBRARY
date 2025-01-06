@@ -1,4 +1,3 @@
-
 // BAND MANAGER VARIABLES
 // VERSION 00.1
 // CREATED by JON KEEVY.... free to use, no credit required
@@ -82,7 +81,7 @@ VAR heat = 1.0
 VAR tour_fund = 1500
 VAR gig_income = 0
 
-VAR currency = "R" // localise for your setting
+VAR currency_symbol = "R" // localise for your setting
 
 VAR action_points = max_action_points
 VAR days_sofar = 0

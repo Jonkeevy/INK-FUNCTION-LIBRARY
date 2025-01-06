@@ -1,18 +1,22 @@
-// <<<<<<< POPULATE OPTIONS w THREAD
+// <<<<<<< POPULATE OPTIONS w THREAD - USED AS INVENTORY MANAGEMENT
 // Credit to averyhiebert.github.io/ via Inkle Discord
+// Adapted by Keevy
 
 LIST BedroomObjects = (Bed), (Drawer), (Window)
 LIST BedroomTalkers = (Dog), (Cat), (Parrot)
 
-VAR BedroomExaminables = (Bed, Dog, Cat, Parrot)
+VAR Interactables = (Bed, Dog, Cat, Parrot)
+
+-> InteractWhat
 
 
--> ExamineLogic
+
     
-== ExamineLogic
-{not BedroomExaminables:You've looked at everything.->DONE}
-Examine?
-<- PopulateOptions(-> Examine, BedroomExaminables)
+== InteractWhat
+{not Interactables:You've interacted with everything.->DONE}
+Interact?
+<- PopulateInventory(-> Interact, inventory)
+//<- PopulateOptions(-> Examine, BedroomExaminables)
 ->DONE
 
 
@@ -24,7 +28,8 @@ Examine?
     -> optionDivert(show_option)
 - -> DONE
 
-== Examine(x)
+== Interact(x)
+{x ? exit: You leave the inventory. ->DONE}
 You look at {x}.
-~ BedroomExaminables -= x
--> ExamineLogic
+~ Interactables -= x
+-> InteractWhat

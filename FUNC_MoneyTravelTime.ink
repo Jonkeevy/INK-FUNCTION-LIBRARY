@@ -1,3 +1,4 @@
+// BAND MANAGER GAME
 // .............. TIME
 
 === function anotherDay()

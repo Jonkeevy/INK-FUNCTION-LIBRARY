@@ -1,3 +1,4 @@
+// BAND MANAGER GAME
 === function game_toolbar()
   {DEBUG:[button=showDEBUG]🦗DEBUG[/button]}
   {showToolbar:
