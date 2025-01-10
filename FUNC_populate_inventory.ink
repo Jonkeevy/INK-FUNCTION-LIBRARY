@@ -2,22 +2,9 @@
 // Credit to averyhiebert.github.io/ via Inkle Discord
 // Adapted by Keevy
 
--> Womble_Womble
-
-== Womble_Womble
-What do you want to do?
-+ Look at Inventory
-    <- ExamineWhat
-
-+ Something else.
-    ->YesThisWorks
--
-->DONE
-
-//-> ExamineLogic
 
 
-    
+   
 == ExamineWhat
 Examine?
 <- PopulateInventory(-> ExamineItem, inventory)

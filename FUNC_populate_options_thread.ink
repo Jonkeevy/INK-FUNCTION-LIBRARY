@@ -1,4 +1,4 @@
-// <<<<<<< POPULATE OPTIONS w THREAD - USED AS INVENTORY MANAGEMENT
+// <<<<<<< POPULATE OPTIONS w THREAD - DISAPPEARING OPTIONS.
 // Credit to averyhiebert.github.io/ via Inkle Discord
 // Adapted by Keevy
 
@@ -10,12 +10,10 @@ VAR Interactables = (Bed, Dog, Cat, Parrot)
 -> InteractWhat
 
 
-
-    
 == InteractWhat
-{not Interactables:You've interacted with everything.->DONE}
+{not Interactables:You've interacted with everything.->Womble_Womble}
 Interact?
-<- PopulateInventory(-> Interact, inventory)
+<- PopulateOptions(-> Interact, Interactables)
 //<- PopulateOptions(-> Examine, BedroomExaminables)
 ->DONE
 
@@ -29,7 +27,7 @@ Interact?
 - -> DONE
 
 == Interact(x)
-{x ? exit: You leave the inventory. ->DONE}
-You look at {x}.
+{x ? exit: You leave the interaction. ->DONE}
+You interact with {x}.
 ~ Interactables -= x
 -> InteractWhat
