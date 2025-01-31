@@ -104,16 +104,6 @@
       "width": 168,
       "height": 60,
       "color": "2"
-    },
-    {
-      "id": "e8142e1cecdaa7cb",
-      "type": "file",
-      "file": "Node Test.md",
-      "styleAttributes": {},
-      "x": -700,
-      "y": -159,
-      "width": 260,
-      "height": 142
     }
   ],
   "edges": [

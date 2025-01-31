@@ -11,7 +11,7 @@ Examine?
 ->DONE
 
 == ExamineItem(x)
-{x ? exit: You leave the inventory. ->Womble_Womble}
+{x ? exit: You leave the inventory. ->LibraryStart}
 You look at {x}.
 -> ExamineWhat
 

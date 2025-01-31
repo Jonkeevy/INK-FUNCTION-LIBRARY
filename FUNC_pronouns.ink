@@ -111,7 +111,7 @@ If you have {narr_thingpossibles(x,"your imagination")} then use {thatthose(x,"t
 
 == Single_Plural_Items(item)
 
-You have {narr_quant(item)} {filter(item, material)} {filter(item, item_name)}{plurInt(quantity(item))}.
+You have {narr_quant(item)} {filter(item, material)} {filter(item, item_name)}{plurInt(getQuantity(item))}.
 -->grammar_test_menu
 
 == Currencies

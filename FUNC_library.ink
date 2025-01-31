@@ -8,15 +8,18 @@ INCLUDE FUNC_reputation.ink
 INCLUDE FUNC_populate_inventory.ink
 INCLUDE FUNC_populate_options_thread.ink
 INCLUDE FUNC_thread_in_tunnel.ink
+INCLUDE FUNC_tables_random_events.ink
 
--> Womble_Womble
+-> LibraryStart
 
-== Womble_Womble
+== LibraryStart
 What do you want to do?
 + Look at Inventory
     <- ExamineWhat
 
 + Something else.
     ->YesThisWorks
++ Count Fish
+    ->catchFish
 -
 ->DONE

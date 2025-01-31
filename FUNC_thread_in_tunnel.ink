@@ -9,6 +9,7 @@
 	Usage: 
 
 */
+== OptTop
 	- (opts)
 		<- thread_in_tunnel(-> eat_apple, -> opts)
 		<- thread_in_tunnel(-> eat_banana, -> get_going)

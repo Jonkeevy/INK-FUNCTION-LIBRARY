@@ -7,11 +7,11 @@ LIST BedroomTalkers = (Dog), (Cat), (Parrot)
 
 VAR Interactables = (Bed, Dog, Cat, Parrot)
 
--> InteractWhat
+//-> InteractWhat
 
 
 == InteractWhat
-{not Interactables:You've interacted with everything.->Womble_Womble}
+{not Interactables:You've interacted with everything.->LibraryStart}
 Interact?
 <- PopulateOptions(-> Interact, Interactables)
 //<- PopulateOptions(-> Examine, BedroomExaminables)
