@@ -57,5 +57,10 @@
    ~ list -= x 
    ~ return x
 
+=== function popMAX(ref list)
+   ~ temp x = LIST_MAX(list) 
+   ~ list -= x 
+   ~ return x
+
 == function returnX(x)
     ~ return x

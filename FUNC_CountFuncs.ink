@@ -1,6 +1,4 @@
-//LIST quantity = J, A, B, C, D, E, F, G, H, I, AJ, AA, AB //etc where the letters replace the digits to get around that lists can't hold integers.
-
-// Need to wrap numbers - do better on the quantity system.
+// >>>>>>>>>>>>>>> COUNTING USING LISTS <<<<<<<<<<<<<
 
 LIST colour = blue, red, silver
 
@@ -8,25 +6,27 @@ LIST sale_price = cheap, affordable, expensive
 
 LIST material = iron, silver, steel, gold, wood
 //LIST weapons = sword, spear, axe, club, dagger
-LIST item_quantity1 = A, B, C, D, E, F, G, H, I
-LIST item_quantity10 = AJ, BJ, CJ, DJ, EJ, FJ, GJ, HJ, IJ
-LIST item_quantity100 = AJJ, BJJ, CJJ, DJJ, EJJ, FJJ, GJJ, HJJ, IJJ
+LIST item_quantity1 = one, two, three, four, five, six, seven, eight, nine
+LIST item_quantity10 = ten =10, twenty =20, thirty = 30, forty = 40, fifty =50, sixty = 60, seventy = 70, eighty = 80, ninety =90
+LIST item_quantity100 = one_hundred = 100, two_hundred = 200, three_hundred = 300, four_hundred = 400, five_hundred = 500, six_hundred =600, seven_hundred = 700, eight_hundred = 800, nine_hundred =900
 
-LIST item_name = exit, sword, spear, axe, club, dagger, trout, carp, sardine
+LIST item_name = exit, sword, spear, axe, club, dagger, trout, carp, sardine, toe
 LIST item_name_proper = Exit, Sword, Spear, Axe, Club, Dagger, Trout, Carp, Sardine
 LIST item_type = weapon, fish, resource
 
 //LIST list_exit = exit
 
+
+
 VAR inventory = (sardine, spear, dagger, exit)
 
-VAR item_trout = (B, BJ, fish, blue, affordable)
+VAR item_trout = (two, twenty, fish, blue, affordable)
 VAR item_carp = (carp, fish, red, cheap)
-VAR item_sardine = (sardine, F, fish, colour.silver, expensive)
-VAR item_dagger = (dagger, A, weapon, steel, cheap)
+VAR item_sardine = (sardine, eight, fish, colour.silver, expensive)
+VAR item_dagger = (dagger, one, weapon, steel, cheap)
 
 VAR item_sword = (sword, material.silver, affordable)
-VAR item_spear = (B, spear, gold, affordable)
+VAR item_spear = (two, spear, gold, affordable)
 VAR item_axe = (axe, iron, affordable)
 VAR item_club = (club, wood, affordable)
 
@@ -34,7 +34,7 @@ VAR item_club = (club, wood, affordable)
 
 === catchFish
 You have: {getQuantity(item_trout)} trout. Or {narr_quant(item_trout)} trout.
-+ Add 9 trout.
++ Add 3 trout.
     ~ alterQUANT(item_trout, 3)
 + Add 12 trout.
     ~ alterQUANT(item_trout, 12)
@@ -69,19 +69,60 @@ You have: {getQuantity(item_trout)} trout. Or {narr_quant(item_trout)} trout.
     ~ return filter(x, colour)
 
 === function getQuantity(x)
-    ~ return LIST_VALUE(filter(x, item_quantity1))+(LIST_VALUE(filter(x, item_quantity10))*10)+(LIST_VALUE(filter(x, item_quantity100))*100)
+    ~ return LIST_VALUE(filter(x, item_quantity1))+LIST_VALUE(filter(x, item_quantity10))+LIST_VALUE(filter(x, item_quantity100))
 
 === function quantify(ref var, x)
 {
 - x >= 100:
-        ~ var += item_quantity100(x / 100)
+        ~ var += item_quantity100((x / 100)*100)
         ~ quantify(var, x mod 100)
 - x >= 10:
-        ~ var += item_quantity10(x / 10)
+        ~ var += item_quantity10((x / 10)*10)
         ~ quantify(var, x mod 10)
 - x > 0:
         ~ var += item_quantity1(x)
 - else:
         ~ return
 }
+
+// >>>>>>>>>>>>>>>>>>> DIP SWITCH COUNTING <<<<<<<<<<<<<<<
+// orignal by Keevy, vastly improved by avery.h
+
+LIST DIPswitch = (dip1 = 1), (dip2 = 2), (dip4 = 4), (dip8 = 8), (dip16 = 16), (dip32 = 32), (dip64 = 64), (dip128 = 128), (dip256 = 256), (dip512 = 512), (dip1024 = 1024), (dip2048 = 2048)
+VAR dipToes = (toes, dip1, dip64, dip4)
+LIST has_toes = toes //???
+
+=== count_your_toes
+You have {countDIP(dipToes)} toes.
++ Add 300
+    Now you have 300 more...
+    ~ alterDIP(dipToes,300)
++ Minus 13
+    ~ alterDIP(dipToes,-13)
+-
+So you have {countDIP(dipToes)} toes.
+-> count_your_toes
+
+=== function countDIP(var)
+    ~var = var ^ DIPswitch
+    {var == (): 
+        ~return 0
+    }
+    ~return INT(LIST_VALUE(var)) + countDIP(var - LIST_MAX(var))
+
+=== function alterDIP(ref var, delta) ===
+    ~var = var - DIPswitch + progDIP(countDIP(var) + INT(delta), DIPswitch)
+
+=== function progDIP(total,switches) ===
+    ~temp switch = LIST_MAX(switches)
+    {
+    - switches == ():
+        ~return ()
+    - total >= 2*LIST_VALUE(switch):
+        ~return ()
+    - total >= LIST_VALUE(switch):
+        ~return switch + progDIP(total-LIST_VALUE(switch), switches-switch)
+    - else:
+        ~return progDIP(total, switches-switch)
+    }
 

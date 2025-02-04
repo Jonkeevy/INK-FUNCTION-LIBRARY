@@ -11,7 +11,7 @@ LIST things = (hammer), block, nail, rat, pencil
 //VAR quantCoins = 0
 
 VAR coins = 0
-VAR testThing = (iron, dagger, I)
+VAR testThing = (iron, dagger, nine)
 
 //->grammar_test_menu
 
