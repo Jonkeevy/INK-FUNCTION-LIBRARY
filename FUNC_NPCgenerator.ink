@@ -1,17 +1,12 @@
-// BAND MANAGER GAME
-// ................. AUDITIONS
+// .................  RE
 
-/*
-=== function name(x)
-    ~ return x ^ LIST_ALL(names)
+
 
 === function skill(x)
     ~ return x ^ LIST_ALL(skills)
 
 === function vice(x)
     ~ return x ^ LIST_ALL(vices)
-
-
 
 === function instrument(x)
     ~ temp instrumentTEMP = x ^ LIST_ALL(instruments)
@@ -30,20 +25,16 @@
     ~ return x ^ LIST_ALL(conditions)
 
 === function generateNPC(ref x)
-    ~ temp random_name = LIST_RANDOM(names)
-    ~ names -= random_name
-    ~ x += random_name
-    ~ temp random_skill = LIST_RANDOM(skills)
-    ~ skills -= random_skill
-    ~ x += random_skill
-    ~ temp random_vice = LIST_RANDOM(vices)
-    ~ vices -= random_vice
-    ~ x += random_vice
-    ~ temp random_instrument = LIST_RANDOM(instruments)
-    ~ instruments -= random_instrument
-    ~ x += random_instrument
-    ~ temp random_condition = LIST_RANDOM(conditions)
-    ~ x += random_condition
+    ~ deal(x,names)
+
+    ~ deal(x,skills)
+    
+    ~ deal(x,vices)
+    
+    ~ deal(x,instruments)
+
+    ~ deal(x,conditions)
+
 
 === function recruitNPC(x)
     {
@@ -62,7 +53,6 @@
     }
     
     ~ band += x
-    ~ reduce(bandsound)
     ~ auditioner = ()
     ~ return true
 
@@ -78,7 +68,6 @@
     ~ band -= xOUT
     ~ band += yIN
     ~ xOUT = yIN
-    ~ reduce(bandsound)
 
 === function fireBandMember(ref xOUT)
     {name(xOUT)} is out. Bummer for them.
@@ -86,7 +75,7 @@
     ~ xOUT = ()
 
 === check_Band_State
-{band_name} is you and {listWithCommas(name(band), "no one else. Not really a band then")}.
+{band_name} is you and {narrate_list(name(band), "no one else. Not really a band then")}.
 You sound {bandsound}.
 Your drive is {band_spirits}.
 
@@ -103,7 +92,7 @@ Your drive is {band_spirits}.
 #CLEAR
 ~ generateNPC(auditioner) // create an NPC with random traits pulled from a list.
 One person has shown up to audition for {band_name}.
-~ sfx_instrument_riff(auditioner)
+//~ sfx_instrument_riff(auditioner)
 Their name is <mark>{name(auditioner)}</mark> and they play a <mark>{instrument(auditioner)}</mark> that looks <mark>{condition(auditioner)}</mark>. As a bonus they're a <mark>{skill(auditioner)}</mark> but they seem <mark>{vice(auditioner)}</mark>.
 
 <br>
@@ -126,7 +115,7 @@ Do you want them to join {band_name}?
     ~ auditioner = ()
 -
 ->check_Band_State->
-->cont_Button->
+//->cont_Button->
 ->->
 
 === kickBandMember
@@ -139,7 +128,7 @@ You kick someone out.
     Right on. Bye {name(auditioner)}.
     ~ auditioner = ()
 -
--> YesItWorks
+-> DONE
 
 === chooseReplaceBandMember
 #CLEAR
@@ -160,6 +149,4 @@ Who do you want to replace with {name(auditioner)}?
     ~ auditioner = ()
 -
 ->check_Band_State->
--> SpendTime
-
-*/
+-> DONE

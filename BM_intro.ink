@@ -35,7 +35,7 @@ You've got drive, you've got talent and you've got a goal!
 
 + [I do?]
 -
-->countDown->
+->DONE
 
 
 -
@@ -44,16 +44,16 @@ To make it you're going to need a band. Something more than a family. Unless may
 Right. I've gone off. Back to ShitFire Fest.
 <br>
 <center><b>Are you going for it?</>
-->cont_Button->
+->DONE
 - (DayOne)
 #CLEAR
-~ showToolbar = true
+//~ showToolbar = true
 You're in your home town, {current_town}. Where you've been crashing on your dad's fold-out while you save enough money to buy a van. Why do you need a van? To get out of {current_town}, obviously.
 But specifically you need a van so you can tour your band. 
 -> NameYourBand->
 If you build up enough <mark>HEAT</mark> you'll earn a spot on the line up at ShitFire Festival. Before you hit the road {band_name} needs another person. Otherwise you'll be a solo act and this game is called BAND manager. Not <mark>lonely sad boy guitar stimulator</mark>.
 Let's say you've already put up flyers for auditions.
-->cont_Button->
+->DONE
 -->Auditions->
 #CLEAR
 Get a good night's sleep. Tomorrow you leave {current_town} and head toward glory. Or failure. Whatever. Wherever. The important thing is that you rock all the way there.
@@ -95,7 +95,7 @@ By the way, what's your band called?
 Rise and ROCK.
 ~ anotherDay()
 -> check_Broke ->
-->countDown->
+->DONE
 A new day in {current_town}.
 {NewDay<2:
 [info side=highlight]A new day refreshes your <mark>Action Point</mark> and offers you the opportunity to <mark>Do Stuff</mark> - like earn money, relax, and importantly <mark>Play Gigs</mark>. The other way to send the day is to <mark>Hit the Road</> and go to a new town, and one step closer to <mark>ShitFire Fest</mark>[/info]
@@ -125,14 +125,14 @@ How do you want to spend your time?
     -> Rehearse ->
 + {action_points >= 1}[Relax]
     ~ action_points --
-    You relax and your spirits are now {improveLIST(band_spirits)}. Which is better than they were before.
+    You relax and your spirits are now {improve(band_spirits)}. Which is better than they were before.
 + {action_points >= 1}[Promote]
     ~ action_points --
     ~ alter(promo_boost,1)
     You hand out some flyers. Feels like littering. Whatever. Maybe it'll bring more people to the show.
 + {action_points >= 1}[Odd Job]
     ~ action_points --
-    ~ reduce(band_spirits)
+    ~ degrade(band_spirits)
     You pick up a little work and make R {OddJob()}. But you've lost some of your drive.
 + [Play Gig]
     ~ action_points = 0
@@ -144,7 +144,7 @@ How do you want to spend your time?
 
 === Rehearse
 #CLEAR
-{band_name} get together and jam for a couple of hours. By the end you sound {improveLIST(bandsound)}. 
+{band_name} get together and jam for a couple of hours. By the end you sound {improve(bandsound)}. 
 ->->
 
 
@@ -153,13 +153,13 @@ How do you want to spend your time?
 #CLEAR
 That's the end of the day. Where will you sleep?
 + The van[, free.] isn't comfortable but it's free.
-    //~ reduce(band_spirits)
+    //~ degrade(band_spirits)
 + A fan['s place, free.] offers to put you up on their floor. You'll fight over who gets the couch but hey - it's free. 
 + {afford_payEach(100)}A hostel[, {currency}100 each.] is affordable and you share a dorm room with some randos.
     ~ payEach(100)
 + {afford_payEach(500)}A hotel[, {currency}500 each.] is expensive. But you deserve a good night sleep. 
     ~ payEach(500)
-    ~ improveLIST(band_spirits)
+    ~ improve(band_spirits)
 -
 -> NewDay
 

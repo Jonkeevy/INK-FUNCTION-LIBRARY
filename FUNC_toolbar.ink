@@ -1,7 +1,7 @@
 // BAND MANAGER GAME
 === function game_toolbar()
-  {DEBUG:[button=showDEBUG]🦗DEBUG[/button]}
-  {showToolbar:
+  //{DEBUG:[button=showDEBUG]🦗DEBUG[/button]}
+  //{showToolbar:
   [button=showBand]🎸BAND[/button]
   [button=showCash]💸{printTourFund()}[/button]
   [button=showHeat]🔥HEAT[/button]

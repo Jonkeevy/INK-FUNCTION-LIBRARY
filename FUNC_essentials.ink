@@ -64,3 +64,53 @@
 
 == function returnX(x)
     ~ return x
+    
+
+// ............ ESSENTIAL LIST FUNCTIONS .........
+
+
+
+=== function draw(ref var, list)
+    // add a random available value from specific list to specific variable
+    ~ var += LIST_RANDOM(list)
+
+=== function deal(ref var, ref list)
+    // add a random available value from specific list to specific variable and mark unavailable
+    ~ temp dealt_value = LIST_RANDOM(list)
+    ~ list -= dealt_value
+    ~ var += dealt_value
+
+=== function discard(ref var, ref list)
+    // remove all values of a specific list from a specific variable
+    ~ var -= var ^ LIST_ALL(list)
+
+=== function recycle(ref var, ref list)
+    // remove all values of a specific list from a specific variable and mark them available in the list
+    ~ temp recycle_value = var ^ LIST_ALL(list)
+    ~ list += recycle_value
+    ~ var -= recycle_value
+
+
+// ............ LIST PRINTING & GRAMMAR  .........
+=== function isAre(list)
+    {LIST_COUNT(list) == 1:is|are}
+    
+=== function plural(list)
+    {LIST_COUNT(list) > 1:s}
+
+=== function article(list)
+    {LIST_COUNT(list) == 1:a }
+
+=== function narrate_list(list, if_empty)
+    // from inky documentation
+    {LIST_COUNT(list):
+    - 2:
+            {LIST_MIN(list)} and {narrate_list(list - LIST_MIN(list), if_empty)}
+    - 1:
+            {list}
+    - 0:
+            {if_empty}
+    - else:
+            {LIST_MIN(list)}, {narrate_list(list - LIST_MIN(list), if_empty)}
+    }
+

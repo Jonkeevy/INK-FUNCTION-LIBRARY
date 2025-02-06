@@ -23,7 +23,7 @@ You arrive at the next location.
 - 8:
     -> trader
 - 9:
-    -> storm
+    -> bigstorm
 - 10:
     -> dragon
 }
@@ -47,7 +47,7 @@ Care to trade?
 + [Ok.]
  ->->
  
- = storm
+ = bigstorm
 Oh no! You got caught in a storm.
 + [Ok.]
  ->->

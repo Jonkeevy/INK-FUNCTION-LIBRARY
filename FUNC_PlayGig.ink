@@ -44,7 +44,7 @@ There's a venue called {venues(PlaytheGig)} you can play. You'll get a round of 
      Consider another career. ->GetPaid
 - (GetPaid)
     The venue manager hands you {GigIncome()}. {gig_income > 500:Not bad.|Which makes sense since there were only five dudes playing pool in there.}{promo_boost>0:Handing out flyers must have helped.}
-    ~ improveLIST(band_spirits)
+    ~ improve(band_spirits)
     ~ promo_boost = 0
 --> Sleep
 

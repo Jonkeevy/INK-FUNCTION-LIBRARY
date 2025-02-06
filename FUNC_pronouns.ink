@@ -59,7 +59,7 @@ That room is {theirs(x)}.
 
 == People
 + Sinlge
-    ~ people = Bob
+    ~ people = Name_genericMale.Bob
 + Plural
     ~ people += Ida
     ~ people += Dave
@@ -122,12 +122,12 @@ You have {narr_quant(item)} {filter(item, material)} {filter(item, item_name)}{p
     ~ coins = 5
 + Zero
     ~ coins = 0
--->Currency_Trackers(coins)
+-->Currency_Trackers()
 
 
-== Currency_Trackers(currency)
+== Currency_Trackers()
 
-You have {print_num(currency)} coin{plurInt(currency)}.
+You have {print_num(coins)} coin{plurInt(coins)}.
 
 -->grammar_test_menu
 

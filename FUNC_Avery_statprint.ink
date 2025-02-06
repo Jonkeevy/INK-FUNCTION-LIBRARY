@@ -2,8 +2,8 @@ VAR health = 0.1
 VAR energy = 0.2
 VAR sanity = 0.3
 
--> demo
-=== demo ===
+
+=== StatPrintdemo ===
 ~set_stat(health, 10)
 ~set_stat(energy, 10)
 ~set_stat(sanity, 10)

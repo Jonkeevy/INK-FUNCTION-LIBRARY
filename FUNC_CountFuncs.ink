@@ -5,7 +5,7 @@ LIST colour = blue, red, silver
 LIST sale_price = cheap, affordable, expensive
 
 LIST material = iron, silver, steel, gold, wood
-//LIST weapons = sword, spear, axe, club, dagger
+
 LIST item_quantity1 = one, two, three, four, five, six, seven, eight, nine
 LIST item_quantity10 = ten =10, twenty =20, thirty = 30, forty = 40, fifty =50, sixty = 60, seventy = 70, eighty = 80, ninety =90
 LIST item_quantity100 = one_hundred = 100, two_hundred = 200, three_hundred = 300, four_hundred = 400, five_hundred = 500, six_hundred =600, seven_hundred = 700, eight_hundred = 800, nine_hundred =900
@@ -13,10 +13,6 @@ LIST item_quantity100 = one_hundred = 100, two_hundred = 200, three_hundred = 30
 LIST item_name = exit, sword, spear, axe, club, dagger, trout, carp, sardine, toe
 LIST item_name_proper = Exit, Sword, Spear, Axe, Club, Dagger, Trout, Carp, Sardine
 LIST item_type = weapon, fish, resource
-
-//LIST list_exit = exit
-
-
 
 VAR inventory = (sardine, spear, dagger, exit)
 
@@ -88,9 +84,9 @@ You have: {getQuantity(item_trout)} trout. Or {narr_quant(item_trout)} trout.
 // >>>>>>>>>>>>>>>>>>> DIP SWITCH COUNTING <<<<<<<<<<<<<<<
 // orignal by Keevy, vastly improved by avery.h
 
-LIST DIPswitch = (dip1 = 1), (dip2 = 2), (dip4 = 4), (dip8 = 8), (dip16 = 16), (dip32 = 32), (dip64 = 64), (dip128 = 128), (dip256 = 256), (dip512 = 512), (dip1024 = 1024), (dip2048 = 2048)
-VAR dipToes = (toes, dip1, dip64, dip4)
-LIST has_toes = toes //???
+LIST DIPswitch = (dip1 = 1), (dip2 = 2), (dip4 = 4), (dip8 = 8), (dip16 = 16), (dip32 = 32), (dip64 = 64), (dip128 = 128), (dip256 = 256), (dip512 = 512), (dip1024 = 1024), (dip2048 = 2048), (dip4096 = 4096), (dip8192 = 8192), (dip16384 = 16384)
+
+VAR dipToes = (toe, dip1, dip64, dip4)
 
 === count_your_toes
 You have {countDIP(dipToes)} toes.
@@ -117,8 +113,6 @@ So you have {countDIP(dipToes)} toes.
     ~temp switch = LIST_MAX(switches)
     {
     - switches == ():
-        ~return ()
-    - total >= 2*LIST_VALUE(switch):
         ~return ()
     - total >= LIST_VALUE(switch):
         ~return switch + progDIP(total-LIST_VALUE(switch), switches-switch)

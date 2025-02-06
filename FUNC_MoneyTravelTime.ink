@@ -85,7 +85,7 @@
 #CLEAR
 Time to get out of {current_town} and hit the road.
 -> check_Finished_Tour->
-There {isAre(towns)} {article(towns)}venue{plural(towns)} you can crash in {listWithCommas(towns,"along the way")}.
+There {isAre(towns)} {article(towns)}venue{plural(towns)} you can crash in {narrate_list(towns,"along the way")}.
 // Easier way to handle concord?
 --> Town_Directory
 
