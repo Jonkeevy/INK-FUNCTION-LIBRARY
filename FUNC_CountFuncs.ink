@@ -14,7 +14,7 @@ LIST item_name = exit, sword, spear, axe, club, dagger, trout, carp, sardine, to
 LIST item_name_proper = Exit, Sword, Spear, Axe, Club, Dagger, Trout, Carp, Sardine
 LIST item_type = weapon, fish, resource
 
-VAR inventory = (sardine, spear, dagger, exit)
+VAR inventory = (sardine, spear, dagger, item_name.exit)
 
 VAR item_trout = (two, twenty, fish, blue, affordable)
 VAR item_carp = (carp, fish, red, cheap)

@@ -36,6 +36,10 @@
         ~ return instrument(npc02)
     - x == name(npc03):
         ~ return instrument(npc03)
+    - x == name(npc04):
+        ~ return instrument(npc04)
+    - x == name(npc05):
+        ~ return instrument(npc05)
     - else:
         nothing
     }

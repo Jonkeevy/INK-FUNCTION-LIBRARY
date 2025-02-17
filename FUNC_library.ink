@@ -6,7 +6,9 @@ Mostly for testing stuff.
 What do you want to do?
 + Look at Inventory
     <- ExamineWhat
-
++ Cycles & Tasks
+    #CLEAR
+    -> newCYCLE_DEMO
 + Something else.
     ->YesThisWorks
 + Count Fish

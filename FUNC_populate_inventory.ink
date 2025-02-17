@@ -2,9 +2,9 @@
 // Credit to averyhiebert.github.io/ via Inkle Discord
 // Adapted by Keevy
 
+// REDUNDANT FUNCTIONS
 
-
-   
+ /*  
 == ExamineWhat
 Examine?
 <- PopulateInventory(-> ExamineItem, inventory)
@@ -24,3 +24,4 @@ You look at {x}.
 //
 --> DONE
 
+*/ 

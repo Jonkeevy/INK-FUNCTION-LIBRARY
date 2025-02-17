@@ -25,7 +25,7 @@ VAR npc02rep = (traitPOS.charm, traitNEG.sincere, neutral)
 //-> Start
 
 == Start
-{has(npc01rep,traitPOS.sincere)}
+{check_overlap(npc01rep,traitPOS.sincere)}
 
 You could be sincere, ruthless, charming. Big events build your reputation, while direct interactions build your rapport.
 Big event. Respond with:

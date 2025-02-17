@@ -1,4 +1,4 @@
-
+/*
 # title: Random Name Generator for Ink
 # author: Jon Keevy
 # theme: light
@@ -6,6 +6,7 @@
 # scenes_align: center          
 # toolbar: game_toolbar
 # cover: IMAGES/PROFILE THRASTOCK.PNG
+*/
 
 
 // Put the INCLUDEs here and a START DIVERT.
