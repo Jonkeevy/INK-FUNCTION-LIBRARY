@@ -34,6 +34,10 @@ LIST Coda_Demonic = (ul), (el), (eth), (oth), (iel), (iziel), (on), (or)
 
 === function name(x)
     {
+    -filter(x, names_SR):
+        ~ return filter(x, names_SR)
+    -filter(x, names_BM):
+        ~ return filter(x, names_BM)
     -filter(x, npc_name):
         ~ return filter(x, npc_name)
     -filter(x, Name_genericMale):

@@ -2,16 +2,25 @@
 === function game_toolbar()
   //{DEBUG:[button=showDEBUG]🦗DEBUG[/button]}
   //{showToolbar:
+    [button=showTask]Tasks in Progress[/button]
+
+/*
   [button=showBand]🎸BAND[/button]
   [button=showCash]💸{printTourFund()}[/button]
   [button=showHeat]🔥HEAT[/button]
   [button=showDay]☀ DAY {days_sofar}[/button]
   [button=showActionPoints]🗲ACTIONS {action_points}[/button]
-  }
+*/
+
+=== function showTask()
+[title]Tasks in Progress[/title]
+{printPROGRESS(remove_insulation)}
+
+/*
   
 === function showBand()
   [title]🎸BAND[/title]
-  {band_name} is you and {listWithCommas(name(band), "no one else. Not really a band then")}.
+  //{band_name} is you and {listWithCommas(name(band), "no one else. Not really a band then")}.
     You sound {bandsound}.
     Your drive is {band_spirits}.
 
@@ -39,6 +48,4 @@ You have {action_points} left for the day. {action_points>0: Spend them wisely.|
 
 === function addCurrency
     ~ tour_fund += 1000
-
-=== function addTestNPC
-    ~ band += testNPC
+*/

@@ -1,7 +1,7 @@
 // <<<<<<<<<<<<<<<<<<<< GRAMMAR FUNCTIONS GENDER >>>>>>>>>>>
 VAR npcA = ()
 
-LIST gender = male, female, nonbinary, it_gender
+LIST gender = (male), (female), (nonbinary), it_gender
 LIST otherList = other
 LIST people = Bob, Dave, Sean, Ida
 LIST things = (hammer), block, nail, rat, pencil
@@ -183,6 +183,32 @@ You have {print_num(coins)} coin{plurInt(coins)}.
     - else:
         ~return "they've"
     }
+
+
+== function Theyre(x)
+    {
+    - x ^ male:
+        ~ return "He's"
+    - x ^ female:
+        ~ return "She's"
+    - x ^ it_gender:
+        ~ return "It's"
+    - else:
+        ~ return "They're"
+    }
+
+== function theyre(x)
+    {
+    - x ^ male:
+        ~ return "he's"
+    - x ^ female:
+        ~ return "she's"
+    - x ^ it_gender:
+        ~ return "it's"
+    - else:
+        ~return "they're"
+    }
+
 
 == function Them(x)
     {

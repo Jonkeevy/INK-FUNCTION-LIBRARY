@@ -4,6 +4,8 @@
 A listing of the functions available.
 Mostly for testing stuff.
 What do you want to do?
++ Resource Gather
+    -> resourceGather
 + Look at Inventory
     <- ExamineWhat
 + Cycles & Tasks

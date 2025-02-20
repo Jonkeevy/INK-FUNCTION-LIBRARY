@@ -1,18 +1,39 @@
-LIST image_index = hydroponics, soap
 
-VAR imgHYDROPONICS = "[img]IMAGES/ICONS/agriculture_hand_plant_grow_nature.png[/img]"
-VAR imgSOAP = "[img]IMAGES/ICONS/bubble_bubbles_washing_cleaning_soap.png[/img]"
 
-=== function inline_image_sorter(var)
+=== function inline_icon_sorter(var)
+[img]<>
 {
 -var ? hydroponics:
-    ~ return "{imgHYDROPONICS}"
+    {imgHYDROPONICS}
 -var ? soap:
-    ~ return "{imgSOAP}"
+    {imgSOAP}
+-var ? solar_system:
+    {imgSOLARSYSTEM}
+-var ? tools:
+    {imgTOOLS}
 -else:
-    ~return "no image"
+    no image
 }
+<>[/img]
 
+
+=== images_sorted
+VAR akanaka_planet = "IMAGES/BANNERS/akanaka_pixel.png"
+
+->DONE
+
+// >>>>>>>> UNSORTED ICONS <<<<<<<<<<<
+=== icons_sorted_
+LIST image_index = hydroponics, soap, solar_system, tools
+
+VAR imgHYDROPONICS = "IMAGES/ICONS/agriculture_hand_plant_grow_nature.png"
+VAR imgSOAP = "IMAGES/ICONS/bubble_bubbles_washing_cleaning_soap.png"
+VAR imgSOLARSYSTEM = "IMAGES/ICONS/solar_system.png"
+VAR imgTOOLS = "IMAGES/ICONS/wrench_screwdriver_tool_options.png"
+
+->DONE
+
+=== icons_un_sorted
 VAR 360_rotate_vr_movement_png = "[img]IMAGES/ICONS/360_rotate_vr_movement.png[/img]"
 VAR 3d_cube_isometric_png = "[img]IMAGES/ICONS/3d_cube_isometric.png[/img]"
 VAR 3d_rotation_vr_png = "[img]IMAGES/ICONS/3d_rotation_vr.png[/img]"
@@ -318,7 +339,7 @@ VAR shout_marketing_advertising_png = "[img]IMAGES/ICONS/shout_marketing_adverti
 VAR sitemap_map_ux_application_png = "[img]IMAGES/ICONS/sitemap_map_ux_application.png[/img]"
 VAR skull_png = "[img]IMAGES/ICONS/skull.png[/img]"
 VAR social_png = "[img]IMAGES/ICONS/social.png[/img]"
-VAR solar_system_png = "[img]IMAGES/ICONS/solar_system.png[/img]"
+
 VAR space_shuttle_png = "[img]IMAGES/ICONS/space_shuttle.png[/img]"
 VAR space_station_png = "[img]IMAGES/ICONS/space_station.png[/img]"
 VAR speaker_audio_sound_png = "[img]IMAGES/ICONS/speaker_audio_sound.png[/img]"
@@ -360,4 +381,4 @@ VAR warp_galaxy_png = "[img]IMAGES/ICONS/warp_galaxy.png[/img]"
 VAR webcam_cam_web_png = "[img]IMAGES/ICONS/webcam_cam_web.png[/img]"
 VAR wheat_paddy_farm_agriculture_png = "[img]IMAGES/ICONS/wheat_paddy_farm_agriculture.png[/img]"
 VAR wi_fi_wifi_internet_png = "[img]IMAGES/ICONS/wi_fi_wifi_internet.png[/img]"
-VAR wrench_screwdriver_tool_options_png = "[img]IMAGES/ICONS/wrench_screwdriver_tool_options.png[/img]"
+->DONE

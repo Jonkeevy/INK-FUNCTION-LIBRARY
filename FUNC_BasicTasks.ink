@@ -25,14 +25,16 @@ VAR remainingCYCLES = 0
 
 LIST taskSTATES = (unknown), researching, available, in_progress, completed
 
+LIST taskPROG_2CYCLES = 0of2, (1of2), (2of2)
+
 LIST taskPROG_5CYCLES = 0of5, (1of5), (2of5), (3of5), (4of5), (5of5) // This is a task that takes 5 cycles
 
 LIST taskPROG_10CYCLES = 0of10, (1of10), (2of10), (3of10), (4of10), (5of10), (6of10), (7of10), (8of10), (9of10), (10of10) // This is a task that takes 10 cycles
 
-LIST taskALL = (chapel), (simple_task), complex_task
+LIST taskALL_demo = (chapel), (simple_task), complex_task
 // All Tasks - the serial number really
 
-VAR taskAVAILABLE = ()
+VAR taskAVAILABLE_demo = ()
 
 //VAR taskRESEARCHABLE = (chapel, complex_task)
 
@@ -57,25 +59,25 @@ LIST taskCOOKER = (cookONE), (cookTWO)
         }
 
     {task ^ available && task ^ LIST_ALL(taskCOOKER):
-        {filter(task,taskCOOKER)} has begun {filter(task,taskALL)}.
+        {filter(task,taskCOOKER)} has begun {filter(task,taskALL_demo)}.
         ~ improve_trait(task, taskSTATES)
-        ~ sorter_improve_progress_TASKDEMO(task)
+        ~ improve_progress(task)
         ~ return
         }
         
     {task ^ taskPROG_5CYCLES.5of5 || task ^ taskPROG_10CYCLES.10of10 :
         ~ improve_trait(task, taskSTATES)
-        {filter(task,taskCOOKER)} has completed {filter(task,taskALL)}.
+        {filter(task,taskCOOKER)} has completed {filter(task,taskALL_demo)}.
         ~ recycle(task, taskCOOKER)
         ~ return
         }
         
     {
         - task ^ in_progress && task ^ LIST_ALL(taskCOOKER):
-            ~ sorter_improve_progress_TASKDEMO(task)
-            {filter(task,taskCOOKER)} is working on {filter(task,taskALL)}.
+            ~ improve_progress(task)
+            {filter(task,taskCOOKER)} is working on {filter(task,taskALL_demo)}.
         - task ^ in_progress:
-            {filter(task,taskALL)} has no one assigned to it.
+            {filter(task,taskALL_demo)} has no one assigned to it.
         }
     
     ~ return
@@ -94,10 +96,10 @@ LIST taskCOOKER = (cookONE), (cookTWO)
 === newCYCLE_DEMO
 
     A NEW CYCLE BEGINS!
-
+    {not(build_chapel^(LIST_ALL(taskCOOKER))): not|yes}
     Current Cycle: {currentCYCLE}
     Remaining: {remainingCYCLES}
-    {sorter_print_completed_tasks()}
+    {sorter_print_completed_tasks_TASKDEMO()}
     ->chooseACTION
     
 === chooseACTION
@@ -120,10 +122,10 @@ LIST taskCOOKER = (cookONE), (cookTWO)
 
 === taskINTERRUPT
     ~ currentTASK = ()
-    ~ taskAVAILABLE = ()
-    ~ opts_check_2conditions_passto_sorter_TASKDEMO(in_progress,LIST_ALL(taskALL), LIST_ALL(taskCOOKER), taskAVAILABLE)
-    {not taskAVAILABLE: No tasks in progress with Cookers.|Reassign Cooker from:}
-    <- PopulateOptions(-> taskINTERRUPT_CHOSEN,taskAVAILABLE)
+    ~ taskAVAILABLE_demo = ()
+    ~ opts_check_2conditions_passto_sorter_TASKDEMO(in_progress,LIST_ALL(taskALL_demo), LIST_ALL(taskCOOKER), taskAVAILABLE_demo)
+    {not taskAVAILABLE_demo: No tasks in progress with Cookers.|Reassign Cooker from:}
+    <- PopulateOptions(-> taskINTERRUPT_CHOSEN,taskAVAILABLE_demo)
     + Back
         ->chooseACTION
     + Skip
@@ -149,10 +151,10 @@ LIST taskCOOKER = (cookONE), (cookTWO)
 
 === taskSTALLED
     ~ currentTASK = ()
-    ~ taskAVAILABLE = ()
-    ~ opts_check_1YESconditions_1NOcondition_passto_sorter_TASKDEMO(in_progress,  LIST_ALL(taskCOOKER), LIST_ALL(taskALL),   taskAVAILABLE)
-    {not taskAVAILABLE: There are no stalled tasks.|These stalled tasks require Cookers:}
-    <- PopulateOptions(-> taskCHOSEN,taskAVAILABLE)
+    ~ taskAVAILABLE_demo = ()
+    ~ opts_check_1YESconditions_1NOcondition_passto_sorter_TASKDEMO(in_progress,  LIST_ALL(taskCOOKER), LIST_ALL(taskALL_demo),   taskAVAILABLE_demo)
+    {not taskAVAILABLE_demo: There are no stalled tasks.|These stalled tasks require Cookers:}
+    <- PopulateOptions(-> taskCHOSEN,taskAVAILABLE_demo)
     + Back
         ->chooseACTION
     + Skip
@@ -164,10 +166,10 @@ LIST taskCOOKER = (cookONE), (cookTWO)
 === taskOptsAvailable
 // Start a new task
     ~ currentTASK = ()
-    ~ taskAVAILABLE = ()
-    ~ opts_check_1conditions_passto_sorter_TASKDEMO(available, LIST_ALL(taskALL), taskAVAILABLE)
-    {not taskAVAILABLE: There are no tasks available.|Available Tasks:}
-    <- PopulateOptions(-> taskCHOSEN,taskAVAILABLE)
+    ~ taskAVAILABLE_demo = ()
+    ~ opts_check_1conditions_passto_sorter_TASKDEMO(available, LIST_ALL(taskALL_demo), taskAVAILABLE_demo)
+    {not taskAVAILABLE_demo: There are no tasks available.|Available Tasks:}
+    <- PopulateOptions(-> taskCHOSEN,taskAVAILABLE_demo)
     + Back
         ->chooseACTION
     + Skip
@@ -190,14 +192,14 @@ LIST taskCOOKER = (cookONE), (cookTWO)
     // Confirm Task and Cook
     ~ currentTASK += x
 
-    TASK: {currentTASK ^ taskALL}
+    TASK: {currentTASK ^ taskALL_demo}
     COOK: {currentTASK ^ taskCOOKER}
     Confirm Assignment?
         + Yes
-            ~ sorter_add_delta_TASKDEMO(filter(currentTASK,taskALL),x)
+            ~ sorter_add_delta_TASKDEMO(filter(currentTASK,taskALL_demo),x)
             ~ remove(currentTASK ^ taskCOOKER, taskCOOKER)
-            //~ remove(currentTASK ^ taskALL, taskALL)
-            ~ taskALL -= chapel
+            //~ remove(currentTASK ^ taskALL_demo, taskALL_demo)
+            ~ taskALL_demo -= chapel
         + No/Change
             ->taskOptsAvailable
     -
@@ -207,7 +209,7 @@ LIST taskCOOKER = (cookONE), (cookTWO)
 
 === taskONGOING
     DEBUG tasks:
-    {taskALL}
+    {taskALL_demo}
     {taskCOOKER}
     {build_chapel}
     {do_simple_task} 
@@ -237,7 +239,7 @@ LIST taskCOOKER = (cookONE), (cookTWO)
 
     ->->
 
-=== function sorter_improve_progress_TASKDEMO(ref task)
+=== function improve_progress(ref task)
     {
     -filter(taskPROG_5CYCLES, task):
         ~ improve_trait(task, taskPROG_5CYCLES)
@@ -245,7 +247,7 @@ LIST taskCOOKER = (cookONE), (cookTWO)
         ~ improve_trait(task, taskPROG_10CYCLES)
     }
 
-=== function sorter_print_completed_tasks()
+=== function sorter_print_completed_tasks_TASKDEMO()
     {check_overlap(build_chapel,completed): Chapel is completed.}
     {check_overlap(do_simple_task,completed): Simple Task is completed.}
     {check_overlap(do_complex_task,completed): Complex Task is completed.}
@@ -393,9 +395,9 @@ LIST taskCOOKER = (cookONE), (cookTWO)
 
     {
         -check_overlap(build_chapel, condition1) && build_chapel !? condition2 && check_overlap(build_chapel, base_list):
-            ~ copy(chapel,taskAVAILABLE)
+            ~ copy(chapel,taskAVAILABLE_demo)
         -check_overlap(do_simple_task, condition1) && not check_overlap(do_simple_task, condition2) && check_overlap(do_simple_task, base_list):
-            ~ copy(simple_task,taskAVAILABLE)
+            ~ copy(simple_task,taskAVAILABLE_demo)
         -check_overlap(do_complex_task, condition1) && not check_overlap(do_complex_task, condition2) && check_overlap(do_complex_task, base_list):
-            ~ copy(complex_task,taskAVAILABLE)
+            ~ copy(complex_task,taskAVAILABLE_demo)
     }

@@ -1,15 +1,23 @@
 // .................  RE
 
-
-
 === function skill(x)
-    ~ return x ^ LIST_ALL(skills)
+    {
+        - filter(x, skills_SR):
+            ~ return filter(x, skills_SR)
+        - filter(x, skills_BM):
+            ~ return filter(x, skills_BM)
+    }
 
 === function vice(x)
-    ~ return x ^ LIST_ALL(vices)
-
+    {
+        - filter(x, vices_SR):
+            ~ return filter(x, vices_SR)
+        - filter(x, vices_BM):
+            ~ return filter(x, vices_BM)
+    }
+    
 === function instrument(x)
-    ~ temp instrumentTEMP = x ^ LIST_ALL(instruments)
+    ~ temp instrumentTEMP = x ^ LIST_ALL(instruments_BM)
         // lists don't support spaces so needs to swap out.
     {instrumentTEMP:
         - lead_guitar:
@@ -22,19 +30,35 @@
 
 === function condition(x)
     //condition of the instruments/equipment
-    ~ return x ^ LIST_ALL(conditions)
+    ~ return x ^ LIST_ALL(conditions_BM)
+
 
 === function generateNPC(ref x)
-    ~ deal(x,names)
-
-    ~ deal(x,skills)
+    ~ deal(x,npc_name)
     
-    ~ deal(x,vices)
+    //~ draw(x,gender)
     
-    ~ deal(x,instruments)
+    //~ deal(x,skills)
+    
+    //~ deal(x,vices)
+    
+    //~ deal(x,instruments)
 
-    ~ deal(x,conditions)
+    //~ deal(x,conditions)
 
+
+=== function generateNPC_SR(ref x)
+    ~ deal(x,names_SR)
+    
+    ~ draw(x,gender)
+    
+    ~ deal(x,skills_SR)
+    
+    ~ deal(x,vices_SR)
+    
+    ~ deal(x,equipments)
+
+    //~ deal(x,conditions)
 
 === function recruitNPC(x)
     {
@@ -53,7 +77,7 @@
     }
     
     ~ band += x
-    ~ auditioner = ()
+    ~ auditioner_BM = ()
     ~ return true
 
 === function whoIS(x)
@@ -74,79 +98,68 @@
     ~ band -= xOUT
     ~ xOUT = ()
 
-=== check_Band_State
-{band_name} is you and {narrate_list(name(band), "no one else. Not really a band then")}.
-You sound {bandsound}.
-Your drive is {band_spirits}.
 
-{whoIS(npc01)}
-{whoIS(npc02)}
-{whoIS(npc03)}
-{whoIS(npc04)}
-{whoIS(npc05)}
-
-->->
 
 
 === Auditions
 #CLEAR
-~ generateNPC(auditioner) // create an NPC with random traits pulled from a list.
-One person has shown up to audition for {band_name}.
-//~ sfx_instrument_riff(auditioner)
-Their name is <mark>{name(auditioner)}</mark> and they play a <mark>{instrument(auditioner)}</mark> that looks <mark>{condition(auditioner)}</mark>. As a bonus they're a <mark>{skill(auditioner)}</mark> but they seem <mark>{vice(auditioner)}</mark>.
+~ generateNPC(auditioner_SR) // create an NPC with random traits pulled from a list.
+One person has shown up to audition for us.
+//~ sfx_instrument_riff(auditioner_SR)
+Their name is <mark>{name(auditioner_SR)}</mark> and they play a <mark>{instrument(auditioner_SR)}</mark> that looks <mark>{condition(auditioner_SR)}</mark>. As a bonus they're a <mark>{skill(auditioner_SR)}</mark> but they seem <mark>{vice(auditioner_SR)}</mark>.
 
 <br>
 {Auditions<=1: // Only show block on first visit to the knot.
 <br>
-[info side=highlight] Auditioners are randomly created with a <mark>name</mark>, an <mark>instrument</mark> which has a <mark>condition</mark>. They'll have a positive <mark>skill</mark> which provide an active of passive bonus. But they will also have a <mark>vice</mark> which increases the chance of certain random events. These events may have negative outcomes, but may also present opportunities.[/info]
+[info side=highlight] auditioner_SRs are randomly created with a <mark>name</mark>, an <mark>instrument</mark> which has a <mark>condition</mark>. They'll have a positive <mark>skill</mark> which provide an active of passive bonus. But they will also have a <mark>vice</mark> which increases the chance of certain random events. These events may have negative outcomes, but may also present opportunities.[/info]
 <br>
 }
 -> Recruit
 
 === Recruit
-Do you want them to join {band_name}?
+Do you want them to join us?
 + [Yeh, alright.]
-    {not recruitNPC(auditioner):
+    {not recruitNPC(auditioner_SR):
     -> kickBandMember
     }
 
 + {Auditions>1} [No, vibes off.]
-    Right on. Bye {name(auditioner)}.
-    ~ auditioner = ()
+    Right on. Bye {name(auditioner_SR)}.
+    ~ auditioner_SR = ()
 -
-->check_Band_State->
+//->check_Band_State->
 //->cont_Button->
 ->->
 
 === kickBandMember
 #CLEAR
-You don't have space to recruit {name(auditioner)}.
+You don't have space to recruit {name(auditioner_SR)}.
 <i>unless</i>...
 You kick someone out.
 + [CUT THE DEAD WEIGHT] ->chooseReplaceBandMember
-+ [{band_name} is good as it is.]
-    Right on. Bye {name(auditioner)}.
-    ~ auditioner = ()
++ [We're good as is.]
+    Right on. Bye {name(auditioner_SR)}.
+    ~ auditioner_SR = ()
 -
 -> DONE
 
 === chooseReplaceBandMember
 #CLEAR
-->check_Band_State->
-Who do you want to replace with {name(auditioner)}?
+//->check_Band_State->
+Who do you want to replace with {name(auditioner_SR)}?
 + [{name(npc01)}?]
-    ~ swapBandMember(npc01,auditioner)
+    ~ swapBandMember(npc01,auditioner_SR)
 + [{name(npc02)}?]
-    ~ swapBandMember(npc02,auditioner)
+    ~ swapBandMember(npc02,auditioner_SR)
 + [{name(npc03)}?]
-    ~ swapBandMember(npc03,auditioner)
+    ~ swapBandMember(npc03,auditioner_SR)
 + [{name(npc04)}?]
-    ~ swapBandMember(npc04,auditioner)
+    ~ swapBandMember(npc04,auditioner_SR)
 + [{name(npc05)}?]
-    ~ swapBandMember(npc05,auditioner)
+    ~ swapBandMember(npc05,auditioner_SR)
 + [NEVERMIND!]
-    Bye {name(auditioner)}.
-    ~ auditioner = ()
+    Bye {name(auditioner_SR)}.
+    ~ auditioner_SR = ()
 -
-->check_Band_State->
+//->check_Band_State->
 -> DONE
